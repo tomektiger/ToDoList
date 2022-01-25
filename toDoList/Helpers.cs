@@ -1,8 +1,8 @@
 namespace toDoList;
 
-public class Beautify
+public class Helpers
 {
-    public static void Decoration()
+    public static void PrintDashes()
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("---------------------------------------------");
@@ -11,15 +11,15 @@ public class Beautify
 
     public static void PrintWelcome()
     {
-        Decoration();
+        PrintDashes();
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("\tWELCOME TO MY TODO APP !! :)");
         Console.WriteLine("\tIT WAS MADE FOR AN INTERVIEW");
         Console.ResetColor();
-        Decoration();
+        PrintDashes();
     }
   
-    public static void Decorate()
+    public static void PrintStars()
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("********************************************");

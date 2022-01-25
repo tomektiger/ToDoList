@@ -1,16 +1,16 @@
-using static toDoList.Beautify;
+using static toDoList.Helpers;
 using static toDoList.TaskListAction;
 
 namespace toDoList;
 
 public class Menu
 { 
-    public static void Choice()
+    public static void PrintMenuAndMakeChoice()
     {
         Console.WriteLine("\nWhat do you want to do ?");
         Console.WriteLine("Available choices: ");
         Console.ForegroundColor = ConsoleColor.DarkYellow;
-        Decoration();
+        PrintDashes();
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("1. Print the entire list of tasks");
         Console.WriteLine("2. Add new task");
@@ -26,24 +26,26 @@ public class Menu
         while (true)
         {
             try
-            {
+            {   
+                //THERE WE CHECK USER OPTION
                 int choice = int.Parse(Console.ReadLine());
-                if (choice <= 0 || choice > 7)
+                if (choice is <= 0 or > 7)
                 {
-                    Decoration();
+                    PrintDashes();
                     Console.WriteLine("\t \tERROR !!!");
-                    Decoration();
-                    Console.WriteLine("You have to choose a number between 1 and 6");
+                    PrintDashes();
+                    Console.WriteLine("You have to choose a number between 1 and 7");
                     Console.Write("\nEnter your choice: ");
                 }
                 else
                 {
-                    performTask(choice);
-                    Decoration();
+                    //THERE WE ARE PERFORMING USER CHOICE
+                    PerformTask(choice);
+                    PrintDashes();
                     Console.WriteLine("\n\n");
                     Console.Write("What next ?: ");
-                    Choice();
-                    Decoration();
+                    PrintMenuAndMakeChoice();
+                    PrintDashes();
                 }
             }
             catch (Exception e)

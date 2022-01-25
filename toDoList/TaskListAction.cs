@@ -1,31 +1,34 @@
 using toDoList.DataAccess;
 using toDoList.Models;
-using static toDoList.Beautify;
+using static toDoList.Helpers;
 namespace toDoList;
 
 
 public class TaskListAction
+
 { 
     public static void PrintTasksList()
     {
-        Decorate();
+        PrintStars();
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("\t\tTASKS TO DO");
         Console.ResetColor();
-        Decorate();
+        PrintStars();
         
         var context = new TaskContext();
-        var taskList = context.Tasks.ToList();
+        
+        var taskList = context.Tasks;
         
         int counter = 1;
         char check = '0';
+        
         foreach (var task in taskList)
         {
             if (task.Check)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 check = '\u2713';
-
+                
             }
             else if (!task.Check)
             {
@@ -39,26 +42,28 @@ public class TaskListAction
 
         }
     }
-    public static void performTask(int Choice)
+    public static void PerformTask(int choice)
     {
         var context = new TaskContext();
-        switch (Choice)
+        var taskList = context.Tasks;
+
+        switch (choice)
         {
             case 1:
                 Console.Clear();
-                Decoration();
+                PrintDashes();
                 PrintTasksList();
                 break;
             case 2:
                 Console.Clear();
-                Decoration();
+                PrintDashes();
                 Console.WriteLine("What task at what time do you want to add ?");
 
                 while (true)
                 {
                     try
                     {
-                        
+
                         Console.Write("Task: ");
                         string task = Console.ReadLine();
                         var newTask = new Tasks();
@@ -90,7 +95,7 @@ public class TaskListAction
             case 3:
                 Console.Clear();
                 PrintTasksList();
-                Decoration();
+                PrintDashes();
                 Console.WriteLine("What do you want to delete ? ");
                 Console.Write("Choose task by name: ");
 
@@ -102,7 +107,6 @@ public class TaskListAction
 
                         if (choosedTask != "")
                         {
-                            var taskList = context.Tasks;
                             foreach (var task in taskList)
                             {
                                 if (task.Task == choosedTask)
@@ -126,51 +130,67 @@ public class TaskListAction
                         Console.WriteLine($"Something went wrong: {e.Message}");
                     }
                 }
+
                 break;
             case 4:
                 Console.Clear();
-                Decoration();
+                PrintDashes();
                 PrintTasksList();
-                Decoration();
-                Console.Write($"Which task have you done (name) ?: ");
+                PrintDashes();
+                Console.Write("Which task have you done (name) ?: ");
                 string checkedTask = Console.ReadLine();
-                
-                foreach (var task in context.Tasks)
+
+                foreach (var task in taskList)
                 {
-                    if (task.Task==checkedTask)
+                    if (task.Task == checkedTask)
                     {
                         task.Check = true;
                     }
                 }
+
                 context.SaveChanges();
                 break;
             case 5:
                 Console.Clear();
-                Decoration();
-                
+                PrintDashes();
+
                 int counter = 1;
+                char check = '0';
+
                 Console.WriteLine("Sorted list: \n");
-                foreach (var task in context.Tasks.ToList().OrderBy(w => w.Task))
+                foreach (var task in taskList.ToList().OrderBy(w => w.Task))
                 {
-                    Console.WriteLine($"{counter}. {task.Task} [{task.Date}]");
+                    if (task.Check)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        check = '\u2713';
+
+                    }
+                    else if (!task.Check)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        check = '\u2717';
+                        Console.ResetColor();
+                    }
+
+                    Console.WriteLine($"{counter}. {task.Task} \t[{task.Date}]\t[{check}]");
                     counter++;
                 }
-                
 
                 break;
             case 6:
                 
-                foreach (var task in context.Tasks)
+                foreach (var task in taskList)
                 {
-                    context.Tasks.Remove(task);
+                    taskList.Remove(task);
                 }
                 context.SaveChanges();
 
                 break;
             case 7:
                 Console.Clear();
-                Console.WriteLine($"Thank you for using my app :)" +
-                                  $"\nI wish you well, Tomasz Kremiec :)");
+                Console.WriteLine("Thank you for using my app :)" +
+                                  "\nI wish you well, Tomasz Kremiec :)");
                 Environment.Exit(0);
                 break;
         }

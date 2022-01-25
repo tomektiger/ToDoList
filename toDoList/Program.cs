@@ -1,13 +1,13 @@
 ﻿namespace toDoList;
 using static Menu;
-using static Beautify;
+using static Helpers;
 class Program
 
 {
     static void Main(string[] args)
     {
         PrintWelcome();
-        Choice();
+        PrintMenuAndMakeChoice();
 
     }
 
