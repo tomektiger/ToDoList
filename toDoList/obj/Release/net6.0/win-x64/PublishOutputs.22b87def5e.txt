@@ -1,4 +1,0 @@
-/Users/tomektiger/Desktop/PROGRAMOWANIE/PROJEKTY .NET/ToDoList/Deploy/toDoList.pdb
-/Users/tomektiger/Desktop/PROGRAMOWANIE/PROJEKTY .NET/ToDoList/Deploy/Microsoft.Data.SqlClient.SNI.dll
-/Users/tomektiger/Desktop/PROGRAMOWANIE/PROJEKTY .NET/ToDoList/Deploy/Microsoft.Data.SqlClient.SNI.pdb
-/Users/tomektiger/Desktop/PROGRAMOWANIE/PROJEKTY .NET/ToDoList/Deploy/toDoList.exe
