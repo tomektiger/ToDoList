@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace toDoList.Migrations
 {
-    public partial class toDoList : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,13 +13,14 @@ namespace toDoList.Migrations
                 name: "Tasks",
                 columns: table => new
                 {
-                    ID = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
-                    Task = table.Column<string>(type: "text", nullable: true),
-                    Date = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDone = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.ID);
+                    table.PrimaryKey("PK_Tasks", x => x.Id);
                 });
         }
 
