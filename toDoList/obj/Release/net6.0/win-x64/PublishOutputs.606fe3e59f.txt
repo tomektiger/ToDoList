@@ -1,0 +1,2 @@
+/Users/tomektiger/Desktop/PROGRAMOWANIE/PROJEKTY .NET/toDoList/Deploy/toDoList.pdb
+/Users/tomektiger/Desktop/PROGRAMOWANIE/PROJEKTY .NET/toDoList/Deploy/toDoList.exe
